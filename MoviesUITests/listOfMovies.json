@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Avengers: Infinity War",
+        "ratting": "8.5",
+        "desc": "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
+        
+    },
+    {
+        "name": "Bohemian Rhapsody",
+        "ratting": "8.4",
+        "desc": "A chronicle of the years leading up to Queen's legendary appearance at the Live Aid (1985) concert.",
+        
+    },
+    {
+        "name": "Aquaman",
+        "ratting": "8.3",
+        "desc": "Arthur Curry learns that he is the heir to the underwater kingdom of Atlantis, and must step forward to lead his people and be a hero to the world.",
+        
+    },
+    {
+        "name": "A Star Is Born",
+        "ratting": "8.2",
+        "desc": "A musician helps a young singer find fame, even as age and alcoholism send his own career into a downward spiral.",
+        
+    },
+]

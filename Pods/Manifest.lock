@@ -1,0 +1,16 @@
+PODS:
+  - Swifter (1.4.5)
+
+DEPENDENCIES:
+  - Swifter
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Swifter
+
+SPEC CHECKSUMS:
+  Swifter: eb2bc1d192a1c09169c7fefd01971565fa940521
+
+PODFILE CHECKSUM: 8443b12a0472ebb65b09a9a73a9809ce6e0e6702
+
+COCOAPODS: 1.5.3
