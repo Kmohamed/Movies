@@ -10,7 +10,16 @@ import UIKit
 
 open class Network: NSObject {
     open func executeGETRequest(api:String, completionBlock:@escaping (Data?) -> Void)  {
-        let baseUrl = ProcessInfo.processInfo.environment["BASEURL"]!
+        let environment = ProcessInfo.processInfo.environment
+        var baseUrl:String = ""
+
+        if let _ = environment["isUITest"] {
+            // Running in a UI test
+            baseUrl = ProcessInfo.processInfo.environment["BASEURL"]!
+        } else {
+            baseUrl = "https://api.instabug.com"
+        }
+
         guard let gitUrl = URL(string: baseUrl + api) else { return }
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let dataTask = session.dataTask(with: gitUrl) { (data, response, error) in
