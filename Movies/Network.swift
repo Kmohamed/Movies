@@ -17,7 +17,7 @@ open class Network: NSObject {
             // Running in a UI test
             baseUrl = ProcessInfo.processInfo.environment["BASEURL"]!
         } else {
-            baseUrl = "https://api.instabug.com"
+            baseUrl = "https://api.example.com"
         }
 
         guard let gitUrl = URL(string: baseUrl + api) else { return }
