@@ -17,7 +17,7 @@ class MoviesUITests: XCTestCase {
     override func setUp() {
         continueAfterFailure = false
         dynamicStubs.setUp()
-        app.launchEnvironment = ["BASEURL" : "http://localhost:8080"]
+        app.launchEnvironment = ["BASEURL" : "http://localhost:8080", "isUITest":"true"]
         continueAfterFailure = false
         super.setUp()
     }
