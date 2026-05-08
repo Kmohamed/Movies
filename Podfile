@@ -14,7 +14,7 @@ target 'Movies' do
 
   target 'MoviesUITests' do
     inherit! :search_paths
-    pod 'Swifter'
+    pod 'Swifter', '~> 1.5'
   end
 
 end

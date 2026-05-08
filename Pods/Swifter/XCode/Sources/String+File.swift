@@ -7,29 +7,28 @@
 
 import Foundation
 
-
 extension String {
-    
+
     public enum FileError: Error {
         case error(Int32)
     }
-    
+
     public class File {
-        
+
         let pointer: UnsafeMutablePointer<FILE>
-        
+
         public init(_ pointer: UnsafeMutablePointer<FILE>) {
             self.pointer = pointer
         }
-        
-        public func close() -> Void {
+
+        public func close() {
             fclose(pointer)
         }
-        
+
         public func seek(_ offset: Int) -> Bool {
             return (fseek(pointer, offset, SEEK_SET) == 0)
         }
-        
+
         public func read(_ data: inout [UInt8]) throws -> Int {
             if data.count <= 0 {
                 return data.count
@@ -46,8 +45,8 @@ extension String {
             }
             throw FileError.error(0)
         }
-        
-        public func write(_ data: [UInt8]) throws -> Void {
+
+        public func write(_ data: [UInt8]) throws {
             if data.count <= 0 {
                 return
             }
@@ -57,7 +56,7 @@ extension String {
                 }
             }
         }
-        
+
         public static func currentWorkingDirectory() throws -> String {
             guard let path = getcwd(nil, 0) else {
                 throw FileError.error(errno)
@@ -65,37 +64,37 @@ extension String {
             return String(cString: path)
         }
     }
-    
+
     public static var pathSeparator = "/"
-    
+
     public func openNewForWriting() throws -> File {
         return try openFileForMode(self, "wb")
     }
-    
+
     public func openForReading() throws -> File {
         return try openFileForMode(self, "rb")
     }
-    
+
     public func openForWritingAndReading() throws -> File {
         return try openFileForMode(self, "r+b")
     }
-    
+
     public func openFileForMode(_ path: String, _ mode: String) throws -> File {
         guard let file = path.withCString({ pathPointer in mode.withCString({ fopen(pathPointer, $0) }) }) else {
             throw FileError.error(errno)
         }
         return File(file)
     }
-    
+
     public func exists() throws -> Bool {
         return try self.withStat {
-            if let _ = $0 {
+            if $0 != nil {
                 return true
             }
             return false
         }
     }
-    
+
     public func directory() throws -> Bool {
         return try self.withStat {
             if let stat = $0 {
@@ -104,7 +103,7 @@ extension String {
             return false
         }
     }
-    
+
     public func files() throws -> [String] {
         guard let dir = self.withCString({ opendir($0) }) else {
             throw FileError.error(errno)
@@ -132,7 +131,7 @@ extension String {
         }
         return results
     }
-    
+
     private func withStat<T>(_ closure: ((stat?) throws -> T)) throws -> T {
         return try self.withCString({
             var statBuffer = stat()

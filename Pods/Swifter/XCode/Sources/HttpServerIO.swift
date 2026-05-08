@@ -12,9 +12,9 @@ public protocol HttpServerIODelegate: class {
     func socketConnectionReceived(_ socket: Socket)
 }
 
-public class HttpServerIO {
+open class HttpServerIO {
 
-    public weak var delegate : HttpServerIODelegate?
+    public weak var delegate: HttpServerIODelegate?
 
     private var socket = Socket(socketFileDescriptor: -1)
     private var sockets = Set<Socket>()
@@ -36,13 +36,12 @@ public class HttpServerIO {
             #if !os(Linux)
             OSAtomicCompareAndSwapInt(self.state.rawValue, state.rawValue, &stateValue)
             #else
-            //TODO - hehe :)
             self.stateValue = state.rawValue
             #endif
         }
     }
 
-    public var operating: Bool { get { return self.state == .running } }
+    public var operating: Bool { return self.state == .running }
 
     /// String representation of the IPv4 address to receive requests from.
     /// It's only used when the server is started with `forceIPv4` option set to true.
@@ -86,7 +85,9 @@ public class HttpServerIO {
                     strongSelf.queue.async {
                         strongSelf.sockets.insert(socket)
                     }
+
                     strongSelf.handleConnection(socket)
+
                     strongSelf.queue.async {
                         strongSelf.sockets.remove(socket)
                     }
@@ -110,7 +111,7 @@ public class HttpServerIO {
         self.state = .stopped
     }
 
-    public func dispatch(_ request: HttpRequest) -> ([String: String], (HttpRequest) -> HttpResponse) {
+    open func dispatch(_ request: HttpRequest) -> ([String: String], (HttpRequest) -> HttpResponse) {
         return ([:], { _ in HttpResponse.notFound })
     }
 
@@ -129,7 +130,6 @@ public class HttpServerIO {
                 }
             } catch {
                 print("Failed to send response: \(error)")
-                break
             }
             if let session = response.socketSession() {
                 delegate?.socketConnectionReceived(socket)
@@ -171,10 +171,10 @@ public class HttpServerIO {
 
         // Some web-socket clients (like Jetfire) expects to have header section in a single packet.
         // We can't promise that but make sure we invoke "write" only once for response header section.
-        
+
         var responseHeader = String()
 
-        responseHeader.append("HTTP/1.1 \(response.statusCode()) \(response.reasonPhrase())\r\n")
+        responseHeader.append("HTTP/1.1 \(response.statusCode) \(response.reasonPhrase)\r\n")
 
         let content = response.content()
 
@@ -199,6 +199,6 @@ public class HttpServerIO {
             try writeClosure(context)
         }
 
-        return keepAlive && content.length != -1;
+        return keepAlive && content.length != -1
     }
 }
