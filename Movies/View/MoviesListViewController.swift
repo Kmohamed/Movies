@@ -42,16 +42,15 @@ extension MoviesListViewController: MoviesListPresenterDelegate {
 
 extension MoviesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (self.moviesListPresnter?.moviesCount())!
+        return self.moviesListPresnter?.moviesCount() ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
+            ?? UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
 
-        cell?.textLabel?.text = self.moviesListPresnter?.movieName(index: indexPath.row)
-        cell?.detailTextLabel?.text = self.moviesListPresnter?.movieRatting(index: indexPath.row)
-        return cell!
+        cell.textLabel?.text = self.moviesListPresnter?.movieName(index: indexPath.row)
+        cell.detailTextLabel?.text = self.moviesListPresnter?.movieRatting(index: indexPath.row)
+        return cell
     }
-    
-    
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 public class HttpRequest {
-    
+
     public var path: String = ""
     public var queryParams: [(String, String)] = []
     public var method: String = ""
@@ -16,16 +16,16 @@ public class HttpRequest {
     public var body: [UInt8] = []
     public var address: String? = ""
     public var params: [String: String] = [:]
-    
+
     public init() {}
-    
+
     public func hasTokenForHeader(_ headerName: String, token: String) -> Bool {
         guard let headerValue = headers[headerName] else {
             return false
         }
         return headerValue.components(separatedBy: ",").filter({ $0.trimmingCharacters(in: .whitespaces).lowercased() == token }).count > 0
     }
-    
+
     public func parseUrlencodedForm() -> [(String, String)] {
         guard let contentTypeHeader = headers["content-type"] else {
             return []
@@ -44,23 +44,23 @@ public class HttpRequest {
                 return (name.replacingOccurrences(of: "+", with: " "),
                         value.replacingOccurrences(of: "+", with: " "))
             }
-            return ("","")
+            return ("", "")
         }
     }
-    
+
     public struct MultiPart {
-        
+
         public let headers: [String: String]
         public let body: [UInt8]
-        
+
         public var name: String? {
             return valueFor("content-disposition", parameter: "name")?.unquote()
         }
-        
+
         public var fileName: String? {
             return valueFor("content-disposition", parameter: "filename")?.unquote()
         }
-        
+
         private func valueFor(_ headerName: String, parameter: String) -> String? {
             return headers.reduce([String]()) { (combined, header: (key: String, value: String)) -> [String] in
                 guard header.key == headerName else {
@@ -77,7 +77,7 @@ public class HttpRequest {
                 }.first
         }
     }
-    
+
     public func parseMultiPartFormData() -> [MultiPart] {
         guard let contentTypeHeader = headers["content-type"] else {
             return []
@@ -86,7 +86,7 @@ public class HttpRequest {
         guard let contentType = contentTypeHeaderTokens.first, contentType == "multipart/form-data" else {
             return []
         }
-        var boundary: String? = nil
+        var boundary: String?
         contentTypeHeaderTokens.forEach({
             let tokens = $0.components(separatedBy: "=")
             if let key = tokens.first, key == "boundary" && tokens.count == 2 {
@@ -98,7 +98,7 @@ public class HttpRequest {
         }
         return []
     }
-    
+
     private func parseMultiPartFormData(_ data: [UInt8], boundary: String) -> [MultiPart] {
         var generator = data.makeIterator()
         var result = [MultiPart]()
@@ -107,7 +107,7 @@ public class HttpRequest {
         }
         return result
     }
-    
+
     private func nextMultiPart(_ generator: inout IndexingIterator<[UInt8]>, boundary: String, isFirst: Bool) -> MultiPart? {
         if isFirst {
             guard nextUTF8MultiPartLine(&generator) == boundary else {
@@ -128,7 +128,7 @@ public class HttpRequest {
         }
         return MultiPart(headers: headers, body: body)
     }
-    
+
     private func nextUTF8MultiPartLine(_ generator: inout IndexingIterator<[UInt8]>) -> String? {
         var temp = [UInt8]()
         while let value = generator.next() {
@@ -141,14 +141,15 @@ public class HttpRequest {
         }
         return String(bytes: temp, encoding: String.Encoding.utf8)
     }
-    
+
+    // swiftlint:disable identifier_name
     static let CR = UInt8(13)
     static let NL = UInt8(10)
-    
+
     private func nextMultiPartBody(_ generator: inout IndexingIterator<[UInt8]>, boundary: String) -> [UInt8]? {
         var body = [UInt8]()
         let boundaryArray = [UInt8](boundary.utf8)
-        var matchOffset = 0;
+        var matchOffset = 0
         while let x = generator.next() {
             matchOffset = ( x == boundaryArray[matchOffset] ? matchOffset + 1 : 0 )
             body.append(x)
