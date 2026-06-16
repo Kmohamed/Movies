@@ -11,6 +11,7 @@
 		C47324893E6921B314641FC4 /* Pods_MoviesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCD614F5F03494D64C8F7113 /* Pods_MoviesUITests.framework */; };
 		CC0A91FD78EE5797AEB99364 /* Pods_MoviesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4630414DE0603277EE009A /* Pods_MoviesTests.framework */; };
 		E1D68C3D21BC9AAD004557F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D68C3C21BC9AAD004557F7 /* AppDelegate.swift */; };
+		AA11BB22CC33DD44EE55FF01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE55FF02 /* SceneDelegate.swift */; };
 		E1D68C4221BC9AAD004557F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1D68C4021BC9AAD004557F7 /* Main.storyboard */; };
 		E1D68C4421BC9AAE004557F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1D68C4321BC9AAE004557F7 /* Assets.xcassets */; };
 		E1D68C4721BC9AAE004557F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1D68C4521BC9AAE004557F7 /* LaunchScreen.storyboard */; };
@@ -61,6 +62,7 @@
 		BE4630414DE0603277EE009A /* Pods_MoviesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoviesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1D68C3921BC9AAD004557F7 /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1D68C3C21BC9AAD004557F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE55FF02 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E1D68C4121BC9AAD004557F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E1D68C4321BC9AAE004557F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E1D68C4621BC9AAE004557F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				E1D68C3C21BC9AAD004557F7 /* AppDelegate.swift */,
+				AA11BB22CC33DD44EE55FF02 /* SceneDelegate.swift */,
 				E1D68C7421BDCBB5004557F7 /* Presenter */,
 				E1D68C7321BDCBAF004557F7 /* View */,
 				E1D68C7221BDCBA4004557F7 /* Model */,
@@ -452,6 +455,7 @@
 			files = (
 				E1D68C9C21BF6EE3004557F7 /* MoviesListViewController.swift in Sources */,
 				E1D68C3D21BC9AAD004557F7 /* AppDelegate.swift in Sources */,
+				AA11BB22CC33DD44EE55FF01 /* SceneDelegate.swift in Sources */,
 				E1D68C7121BDB6A9004557F7 /* Network.swift in Sources */,
 				E1D68C9321BF5B79004557F7 /* MovieParser.swift in Sources */,
 				E1D68C7C21BF4155004557F7 /* Movie.swift in Sources */,
@@ -585,7 +589,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56S6Q9SA8U;
 				INFOPLIST_FILE = Movies/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -605,6 +610,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56S6Q9SA8U;
 				INFOPLIST_FILE = MoviesUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -626,7 +632,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56S6Q9SA8U;
 				INFOPLIST_FILE = MoviesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -764,7 +770,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56S6Q9SA8U;
 				INFOPLIST_FILE = Movies/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -784,7 +791,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56S6Q9SA8U;
 				INFOPLIST_FILE = Movies/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -804,6 +812,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56S6Q9SA8U;
 				INFOPLIST_FILE = MoviesUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -825,6 +834,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56S6Q9SA8U;
 				INFOPLIST_FILE = MoviesUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -846,7 +856,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56S6Q9SA8U;
 				INFOPLIST_FILE = MoviesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -868,7 +878,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 56S6Q9SA8U;
 				INFOPLIST_FILE = MoviesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
